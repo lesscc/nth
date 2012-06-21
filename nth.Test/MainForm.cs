@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Numerics;
 using System.Windows.Forms;
 
 using nth.Utilities;
-using System.Collections.Generic;
-using System.Numerics;
+
+
 
 namespace nth.Test
 {
     public partial class nF_Main : Form
     {
+		private static HiPerfTimer pt = new HiPerfTimer();
+
         public nF_Main()
         {
             InitializeComponent();
@@ -16,7 +20,6 @@ namespace nth.Test
 
 		private void nB_Calc_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
 			pt.Start();
 			BigInteger value = nth.calcNthAlpha(nT_Text.Text, false);
 			nT_NthValue.Text = value.ToString();
@@ -27,9 +30,6 @@ namespace nth.Test
 
 		private void nB_Calc2_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
-			pt.Start();
-
 			BigInteger nthValue;
 			int seed;
 
@@ -41,6 +41,7 @@ namespace nth.Test
 			{
 				if (seed > 1)
 				{
+					pt.Start();
 					List<BigInteger> nthArray = nth.calcNthArray(nthValue, seed);
 
 					string sNthArray = "";
@@ -50,6 +51,8 @@ namespace nth.Test
 					}
 					sNthArray = "[" + sNthArray.Substring(0, sNthArray.Length - 1) + "]";
 					nT_NthArray.Text = sNthArray;
+					pt.Stop();
+					Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
 				}
 				else
 				{
@@ -60,8 +63,6 @@ namespace nth.Test
 			{
 				nT_NthArray.Text = "Both values need to be an integer.";
 			}
-			pt.Stop();
-			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
 		}
 
 		private void nB_CalcASCII2_Click(object sender, EventArgs e)
@@ -72,24 +73,21 @@ namespace nth.Test
 
 		private void nB_CalcASCII_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
 			pt.Start();
 			BigInteger value = nth.calcNthASCII(nT_Text.Text, false);
-			nT_NthValue.Text = value.ToString();
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
+
+			nT_NthValue.Text = value.ToString();
 		}
 
 		private void nB_TestAlpha1000_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000, 26); 
 			pt.Start();
-			for (int i = 1; i < 10; i++)
+			for (int i = 0; i < 10 * 1000; i++)
 			{
-				for (int j = 1; j < 1000; j++)
-				{
-					nth.calcNthAlpha(Randomizer.RandomStringAlpha(i), false);
-				}
+				nth.calcNth(test[i], 26, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -98,14 +96,11 @@ namespace nth.Test
 
 		private void nB_TestAlphaMillion_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000000, 26); 
 			pt.Start();
-			for (int i = 1; i < 10; i++)
+			for (int i = 0; i < 10 * 1000000; i++)
 			{
-				for (long j = 1; j < 1000000; j++)
-				{
-					nth.calcNthAlpha(Randomizer.RandomStringAlpha(i), false);
-				}
+				nth.calcNth(test[i], 26, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -114,14 +109,11 @@ namespace nth.Test
 
 		private void nB_TestAlpha1000x100_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000, 26);
 			pt.Start();
-			for (int i = 1; i < 100; i++)
+			for (int i = 0; i < 100 * 1000; i++)
 			{
-				for (int j = 1; j < 1000; j++)
-				{
-					nth.calcNthAlpha(Randomizer.RandomStringAlpha(i), false);
-				}
+				nth.calcNth(test[i], 26, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -130,14 +122,11 @@ namespace nth.Test
 
 		private void nB_TestAlphaMillionx100_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000, 26);
 			pt.Start();
-			for (int i = 1; i < 100; i++)
+			for (int i = 0; i < 100 * 1000000; i++)
 			{
-				for (long j = 1; j < 1000000; j++)
-				{
-					nth.calcNthAlpha(Randomizer.RandomStringAlpha(i), false);
-				}
+				nth.calcNth(test[i], 26, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -146,12 +135,11 @@ namespace nth.Test
 
 		private void nB_TestAlphaBillion_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000, 26);
 			pt.Start();
-			string test = Randomizer.RandomStringAlpha(10);
-			for (long j = 1; j < 1000000000; j++)
+			for (int i = 0; i < 10 * 100000000; i++)
 			{
-				nth.calcNthAlpha(test, false);
+				nth.calcNth(test[i], 26, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -160,14 +148,11 @@ namespace nth.Test
 
 		private void nB_TestASCII1000_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000);
 			pt.Start();
-			for (int i = 1; i < 10; i++)
+			for (int i = 0; i < 10 * 1000; i++)
 			{
-				for (int j = 1; j < 1000; j++)
-				{
-					nth.calcNthASCII(Randomizer.RandomStringASCII(i), false);
-				}
+				nth.calcNth(test[i], 256, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -176,14 +161,11 @@ namespace nth.Test
 
 		private void nB_TestASCIIMillion_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000);
 			pt.Start();
-			for (int i = 1; i < 10; i++)
+			for (int i = 0; i < 10 * 1000000; i++)
 			{
-				for (long j = 1; j < 1000000; j++)
-				{
-					nth.calcNthASCII(Randomizer.RandomStringASCII(i), false);
-				}
+				nth.calcNth(test[i], 256, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -192,14 +174,11 @@ namespace nth.Test
 
 		private void nB_TestASCII1000x100_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 1000);
 			pt.Start();
-			for (int i = 1; i < 100; i++)
+			for (int i = 0; i < 100 * 1000; i++)
 			{
-				for (int j = 1; j < 1000; j++)
-				{
-					nth.calcNthASCII(Randomizer.RandomStringASCII(i), false);
-				}
+				nth.calcNth(test[i], 256, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -208,14 +187,11 @@ namespace nth.Test
 
 		private void nB_TestASCIIMillionx100_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(100, 1000000);
 			pt.Start();
-			for (int i = 1; i < 100; i++)
+			for (int i = 0; i < 100 * 1000000; i++)
 			{
-				for (long j = 1; j < 1000000; j++)
-				{
-					nth.calcNthASCII(Randomizer.RandomStringASCII(i), false);
-				}
+				nth.calcNth(test[i], 256, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -224,12 +200,11 @@ namespace nth.Test
 
 		private void nB_TestASCIIBillion_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			Byte[][] test = Randomizer.RandomByteArray(10, 100000000);
 			pt.Start();
-			string test = Randomizer.RandomStringASCII(10);
-			for (long j = 1; j < 1000000000; j++)
+			for (int i = 0; i < 10 * 100000000; i++)
 			{
-				nth.calcNthASCII(test, false);
+				nth.calcNth(test[i], 256, 0);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -238,14 +213,11 @@ namespace nth.Test
 
 		private void nB_TestUTF81000_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			string[] test = Randomizer.createRandomStringArray(10, 1000);
 			pt.Start();
-			for (int i = 1; i < 10; i++)
+			for (int i = 0; i < 10 * 1000; i++)
 			{
-				for (int j = 1; j < 1000; j++)
-				{
-					nth.calcNthUTF8(Randomizer.RandomStringUTF8(i), false);
-				}
+				nth.calcNthUTF8(test[i], false);
 			}
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
@@ -254,7 +226,7 @@ namespace nth.Test
 
 		private void nB_TestUTF8Million_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			
 			pt.Start();
 			for (int i = 1; i < 10; i++)
 			{
@@ -270,7 +242,7 @@ namespace nth.Test
 
 		private void nB_TestUTF81000x100_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			
 			pt.Start();
 			for (int i = 1; i < 100; i++)
 			{
@@ -286,7 +258,7 @@ namespace nth.Test
 
 		private void nB_TestUTF8Millionx100_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			
 			pt.Start();
 			for (int i = 1; i < 100; i++)
 			{
@@ -302,7 +274,7 @@ namespace nth.Test
 
 		private void nB_TestUTF8Billion_Click(object sender, EventArgs e)
 		{
-			HiPerfTimer pt = new HiPerfTimer();
+			
 			pt.Start();
 			string test = Randomizer.RandomStringUTF8(10);
 			for (long j = 1; j < 1000000000; j++)
@@ -313,10 +285,5 @@ namespace nth.Test
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
 			nT_TestUTF8Duration.Text = DoubleConverter.ToExactString(pt.Duration);
 		}
-
-
-
-
-
     }
 }
