@@ -32,12 +32,13 @@
 			this.nB_Calc = new System.Windows.Forms.Button();
 			this.nT_Text = new System.Windows.Forms.TextBox();
 			this.nL_Text = new System.Windows.Forms.Label();
-			this.nT_nthValue = new System.Windows.Forms.TextBox();
+			this.nT_NthValue = new System.Windows.Forms.TextBox();
 			this.nL_NthValue = new System.Windows.Forms.Label();
 			this.nB_TestAlpha1000 = new System.Windows.Forms.Button();
 			this.nB_TestAlphaMillion = new System.Windows.Forms.Button();
 			this.nB_TestAlphaMillionx100 = new System.Windows.Forms.Button();
-			this.nGB_NthValue = new System.Windows.Forms.GroupBox();
+			this.nGB_CalcNthValue = new System.Windows.Forms.GroupBox();
+			this.nB_CalcASCII = new System.Windows.Forms.Button();
 			this.nGB_TestAlpha = new System.Windows.Forms.GroupBox();
 			this.nL_TestAlphaSeconds = new System.Windows.Forms.Label();
 			this.nB_TestAlphaBillion = new System.Windows.Forms.Button();
@@ -62,10 +63,20 @@
 			this.nB_TestUTF8Millionx100 = new System.Windows.Forms.Button();
 			this.nB_TestUTF81000 = new System.Windows.Forms.Button();
 			this.nB_TestUTF8Million = new System.Windows.Forms.Button();
-			this.nGB_NthValue.SuspendLayout();
+			this.nGB_CalcNthArray = new System.Windows.Forms.GroupBox();
+			this.nB_CalcASCII2 = new System.Windows.Forms.Button();
+			this.nT_NthArray = new System.Windows.Forms.TextBox();
+			this.nL_NthArray = new System.Windows.Forms.Label();
+			this.nB_Calc2 = new System.Windows.Forms.Button();
+			this.nT_NthValue2 = new System.Windows.Forms.TextBox();
+			this.nL_NthValue2 = new System.Windows.Forms.Label();
+			this.nT_Seed = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.nGB_CalcNthValue.SuspendLayout();
 			this.nGB_TestAlpha.SuspendLayout();
 			this.nGB_TestASCII.SuspendLayout();
 			this.nGB_TestUTF8.SuspendLayout();
+			this.nGB_CalcNthArray.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// nB_Calc
@@ -94,12 +105,12 @@
 			this.nL_Text.TabIndex = 2;
 			this.nL_Text.Text = "Text to Calculate";
 			// 
-			// nT_nthValue
+			// nT_NthValue
 			// 
-			this.nT_nthValue.Location = new System.Drawing.Point(99, 45);
-			this.nT_nthValue.Name = "nT_nthValue";
-			this.nT_nthValue.Size = new System.Drawing.Size(483, 20);
-			this.nT_nthValue.TabIndex = 3;
+			this.nT_NthValue.Location = new System.Drawing.Point(99, 45);
+			this.nT_NthValue.Name = "nT_NthValue";
+			this.nT_NthValue.Size = new System.Drawing.Size(483, 20);
+			this.nT_NthValue.TabIndex = 3;
 			// 
 			// nL_NthValue
 			// 
@@ -140,19 +151,30 @@
 			this.nB_TestAlphaMillionx100.UseVisualStyleBackColor = true;
 			this.nB_TestAlphaMillionx100.Click += new System.EventHandler(this.nB_TestAlphaMillionx100_Click);
 			// 
-			// nGB_NthValue
+			// nGB_CalcNthValue
 			// 
-			this.nGB_NthValue.Controls.Add(this.nB_Calc);
-			this.nGB_NthValue.Controls.Add(this.nT_Text);
-			this.nGB_NthValue.Controls.Add(this.nL_Text);
-			this.nGB_NthValue.Controls.Add(this.nT_nthValue);
-			this.nGB_NthValue.Controls.Add(this.nL_NthValue);
-			this.nGB_NthValue.Location = new System.Drawing.Point(12, 12);
-			this.nGB_NthValue.Name = "nGB_NthValue";
-			this.nGB_NthValue.Size = new System.Drawing.Size(669, 80);
-			this.nGB_NthValue.TabIndex = 8;
-			this.nGB_NthValue.TabStop = false;
-			this.nGB_NthValue.Text = "Calculate nth Value";
+			this.nGB_CalcNthValue.Controls.Add(this.nB_CalcASCII);
+			this.nGB_CalcNthValue.Controls.Add(this.nB_Calc);
+			this.nGB_CalcNthValue.Controls.Add(this.nT_Text);
+			this.nGB_CalcNthValue.Controls.Add(this.nL_Text);
+			this.nGB_CalcNthValue.Controls.Add(this.nT_NthValue);
+			this.nGB_CalcNthValue.Controls.Add(this.nL_NthValue);
+			this.nGB_CalcNthValue.Location = new System.Drawing.Point(12, 12);
+			this.nGB_CalcNthValue.Name = "nGB_CalcNthValue";
+			this.nGB_CalcNthValue.Size = new System.Drawing.Size(669, 80);
+			this.nGB_CalcNthValue.TabIndex = 8;
+			this.nGB_CalcNthValue.TabStop = false;
+			this.nGB_CalcNthValue.Text = "Calculate nth Value";
+			// 
+			// nB_CalcASCII
+			// 
+			this.nB_CalcASCII.Location = new System.Drawing.Point(588, 43);
+			this.nB_CalcASCII.Name = "nB_CalcASCII";
+			this.nB_CalcASCII.Size = new System.Drawing.Size(75, 23);
+			this.nB_CalcASCII.TabIndex = 5;
+			this.nB_CalcASCII.Text = "Calc ASCII";
+			this.nB_CalcASCII.UseVisualStyleBackColor = true;
+			this.nB_CalcASCII.Click += new System.EventHandler(this.nB_CalcASCII_Click);
 			// 
 			// nGB_TestAlpha
 			// 
@@ -400,26 +422,114 @@
 			this.nB_TestUTF8Million.UseVisualStyleBackColor = true;
 			this.nB_TestUTF8Million.Click += new System.EventHandler(this.nB_TestUTF8Million_Click);
 			// 
+			// nGB_CalcNthArray
+			// 
+			this.nGB_CalcNthArray.Controls.Add(this.nB_CalcASCII2);
+			this.nGB_CalcNthArray.Controls.Add(this.nT_NthArray);
+			this.nGB_CalcNthArray.Controls.Add(this.nL_NthArray);
+			this.nGB_CalcNthArray.Controls.Add(this.nB_Calc2);
+			this.nGB_CalcNthArray.Controls.Add(this.nT_NthValue2);
+			this.nGB_CalcNthArray.Controls.Add(this.nL_NthValue2);
+			this.nGB_CalcNthArray.Controls.Add(this.nT_Seed);
+			this.nGB_CalcNthArray.Controls.Add(this.label2);
+			this.nGB_CalcNthArray.Location = new System.Drawing.Point(12, 345);
+			this.nGB_CalcNthArray.Name = "nGB_CalcNthArray";
+			this.nGB_CalcNthArray.Size = new System.Drawing.Size(669, 103);
+			this.nGB_CalcNthArray.TabIndex = 15;
+			this.nGB_CalcNthArray.TabStop = false;
+			this.nGB_CalcNthArray.Text = "Calculate nth Array";
+			// 
+			// nB_CalcASCII2
+			// 
+			this.nB_CalcASCII2.Location = new System.Drawing.Point(588, 43);
+			this.nB_CalcASCII2.Name = "nB_CalcASCII2";
+			this.nB_CalcASCII2.Size = new System.Drawing.Size(75, 23);
+			this.nB_CalcASCII2.TabIndex = 7;
+			this.nB_CalcASCII2.Text = "Calc ASCII";
+			this.nB_CalcASCII2.UseVisualStyleBackColor = true;
+			this.nB_CalcASCII2.Click += new System.EventHandler(this.nB_CalcASCII2_Click);
+			// 
+			// nT_NthArray
+			// 
+			this.nT_NthArray.Location = new System.Drawing.Point(123, 71);
+			this.nT_NthArray.Name = "nT_NthArray";
+			this.nT_NthArray.Size = new System.Drawing.Size(459, 20);
+			this.nT_NthArray.TabIndex = 5;
+			// 
+			// nL_NthArray
+			// 
+			this.nL_NthArray.AutoSize = true;
+			this.nL_NthArray.Location = new System.Drawing.Point(6, 74);
+			this.nL_NthArray.Name = "nL_NthArray";
+			this.nL_NthArray.Size = new System.Drawing.Size(49, 13);
+			this.nL_NthArray.TabIndex = 6;
+			this.nL_NthArray.Text = "nth Array";
+			// 
+			// nB_Calc2
+			// 
+			this.nB_Calc2.Location = new System.Drawing.Point(588, 17);
+			this.nB_Calc2.Name = "nB_Calc2";
+			this.nB_Calc2.Size = new System.Drawing.Size(75, 23);
+			this.nB_Calc2.TabIndex = 0;
+			this.nB_Calc2.Text = "Calculate";
+			this.nB_Calc2.UseVisualStyleBackColor = true;
+			this.nB_Calc2.Click += new System.EventHandler(this.nB_Calc2_Click);
+			// 
+			// nT_NthValue2
+			// 
+			this.nT_NthValue2.Location = new System.Drawing.Point(123, 19);
+			this.nT_NthValue2.Name = "nT_NthValue2";
+			this.nT_NthValue2.Size = new System.Drawing.Size(459, 20);
+			this.nT_NthValue2.TabIndex = 1;
+			// 
+			// nL_NthValue2
+			// 
+			this.nL_NthValue2.AutoSize = true;
+			this.nL_NthValue2.Location = new System.Drawing.Point(6, 22);
+			this.nL_NthValue2.Name = "nL_NthValue2";
+			this.nL_NthValue2.Size = new System.Drawing.Size(111, 13);
+			this.nL_NthValue2.TabIndex = 2;
+			this.nL_NthValue2.Text = "nth Value to Calculate";
+			// 
+			// nT_Seed
+			// 
+			this.nT_Seed.Location = new System.Drawing.Point(123, 45);
+			this.nT_Seed.Name = "nT_Seed";
+			this.nT_Seed.Size = new System.Drawing.Size(459, 20);
+			this.nT_Seed.TabIndex = 3;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(6, 48);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(32, 13);
+			this.label2.TabIndex = 4;
+			this.label2.Text = "Seed";
+			// 
 			// nF_Main
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(692, 346);
+			this.ClientSize = new System.Drawing.Size(692, 460);
+			this.Controls.Add(this.nGB_CalcNthArray);
 			this.Controls.Add(this.nGB_TestUTF8);
 			this.Controls.Add(this.nGB_TestASCII);
 			this.Controls.Add(this.nGB_TestAlpha);
-			this.Controls.Add(this.nGB_NthValue);
+			this.Controls.Add(this.nGB_CalcNthValue);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "nF_Main";
 			this.Text = "Nth Networks";
-			this.nGB_NthValue.ResumeLayout(false);
-			this.nGB_NthValue.PerformLayout();
+			this.nGB_CalcNthValue.ResumeLayout(false);
+			this.nGB_CalcNthValue.PerformLayout();
 			this.nGB_TestAlpha.ResumeLayout(false);
 			this.nGB_TestAlpha.PerformLayout();
 			this.nGB_TestASCII.ResumeLayout(false);
 			this.nGB_TestASCII.PerformLayout();
 			this.nGB_TestUTF8.ResumeLayout(false);
 			this.nGB_TestUTF8.PerformLayout();
+			this.nGB_CalcNthArray.ResumeLayout(false);
+			this.nGB_CalcNthArray.PerformLayout();
 			this.ResumeLayout(false);
 
         }
@@ -429,12 +539,12 @@
         private System.Windows.Forms.Button nB_Calc;
         private System.Windows.Forms.TextBox nT_Text;
         private System.Windows.Forms.Label nL_Text;
-		private System.Windows.Forms.TextBox nT_nthValue;
+		private System.Windows.Forms.TextBox nT_NthValue;
 		private System.Windows.Forms.Label nL_NthValue;
 		private System.Windows.Forms.Button nB_TestAlpha1000;
 		private System.Windows.Forms.Button nB_TestAlphaMillion;
 		private System.Windows.Forms.Button nB_TestAlphaMillionx100;
-		private System.Windows.Forms.GroupBox nGB_NthValue;
+		private System.Windows.Forms.GroupBox nGB_CalcNthValue;
 		private System.Windows.Forms.GroupBox nGB_TestAlpha;
 		private System.Windows.Forms.Label nL_TestAlphaSeconds;
 		private System.Windows.Forms.Button nB_TestAlphaBillion;
@@ -459,6 +569,16 @@
 		private System.Windows.Forms.Button nB_TestUTF8Millionx100;
 		private System.Windows.Forms.Button nB_TestUTF81000;
 		private System.Windows.Forms.Button nB_TestUTF8Million;
+		private System.Windows.Forms.GroupBox nGB_CalcNthArray;
+		private System.Windows.Forms.TextBox nT_NthArray;
+		private System.Windows.Forms.Label nL_NthArray;
+		private System.Windows.Forms.Button nB_Calc2;
+		private System.Windows.Forms.TextBox nT_NthValue2;
+		private System.Windows.Forms.Label nL_NthValue2;
+		private System.Windows.Forms.TextBox nT_Seed;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Button nB_CalcASCII;
+		private System.Windows.Forms.Button nB_CalcASCII2;
     }
 }
 

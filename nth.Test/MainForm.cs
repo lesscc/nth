@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 
 using nth.Utilities;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace nth.Test
 {
@@ -16,8 +18,64 @@ namespace nth.Test
 		{
 			HiPerfTimer pt = new HiPerfTimer();
 			pt.Start();
-			double value = nth.calcNthAlpha(nT_Text.Text, false);
-			nT_nthValue.Text = DoubleConverter.ToExactString(value);
+			BigInteger value = nth.calcNthAlpha(nT_Text.Text, false);
+			nT_NthValue.Text = value.ToString();
+			pt.Stop();
+			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
+		}
+
+
+		private void nB_Calc2_Click(object sender, EventArgs e)
+		{
+			HiPerfTimer pt = new HiPerfTimer();
+			pt.Start();
+
+			BigInteger nthValue;
+			int seed;
+
+			bool test = true;
+			test &= BigInteger.TryParse(nT_NthValue2.Text, out nthValue);
+			test &= int.TryParse(nT_Seed.Text, out seed);
+
+			if (test)
+			{
+				if (seed > 1)
+				{
+					List<BigInteger> nthArray = nth.calcNthArray(nthValue, seed);
+
+					string sNthArray = "";
+					for (int i = 0; i < nthArray.Count; i++)
+					{
+						sNthArray += nthArray[i].ToString() + ",";
+					}
+					sNthArray = "[" + sNthArray.Substring(0, sNthArray.Length - 1) + "]";
+					nT_NthArray.Text = sNthArray;
+				}
+				else
+				{
+					nT_NthArray.Text = "Seed value needs to be positive integer greater than 1.";
+				}
+			}
+			else
+			{
+				nT_NthArray.Text = "Both values need to be an integer.";
+			}
+			pt.Stop();
+			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
+		}
+
+		private void nB_CalcASCII2_Click(object sender, EventArgs e)
+		{
+			nT_Seed.Text = "128";
+			nB_Calc2_Click(sender, e);
+		}
+
+		private void nB_CalcASCII_Click(object sender, EventArgs e)
+		{
+			HiPerfTimer pt = new HiPerfTimer();
+			pt.Start();
+			BigInteger value = nth.calcNthASCII(nT_Text.Text, false);
+			nT_NthValue.Text = value.ToString();
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
 		}
@@ -255,5 +313,10 @@ namespace nth.Test
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
 			nT_TestUTF8Duration.Text = DoubleConverter.ToExactString(pt.Duration);
 		}
+
+
+
+
+
     }
 }
