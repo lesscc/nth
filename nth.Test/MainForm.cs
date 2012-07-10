@@ -22,8 +22,11 @@ namespace nth.Test
 		{
 			pt.Start();
 			BigInteger value = nth.calcNthAlpha(nT_Text.Text, false);
-			nT_NthValue.Text = value.ToString();
 			pt.Stop();
+			string text = string.Format("{0} - 0x{0:x}).", value);
+			nT_NthValue.Text = text;
+
+			//nT_NthValue.Text = value.ToString();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
 		}
 
@@ -45,9 +48,9 @@ namespace nth.Test
 					List<BigInteger> nthArray = nth.calcNthArray(nthValue, seed);
 
 					string sNthArray = "";
-					for (int i = 0; i < nthArray.Count; i++)
+					for (int i = nthArray.Count; i > 0; i--)
 					{
-						sNthArray += nthArray[i].ToString() + ",";
+						sNthArray += nthArray[i-1].ToString() + ",";
 					}
 					sNthArray = "[" + sNthArray.Substring(0, sNthArray.Length - 1) + "]";
 					nT_NthArray.Text = sNthArray;
@@ -78,7 +81,9 @@ namespace nth.Test
 			pt.Stop();
 			Console.WriteLine("Calcuation Duration: {0} sec\n", pt.Duration);
 
-			nT_NthValue.Text = value.ToString();
+			string text = string.Format("{0} - 0x{0:x}).", value);
+			nT_NthValue.Text = text;
+
 		}
 
 		private void nB_TestAlpha1000_Click(object sender, EventArgs e)
